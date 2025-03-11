@@ -8,11 +8,15 @@ set(CMAKE_BUILD_TYPE Debug)
 
 set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
 
-
+set(NWTool_Root ${CMAKE_CURRENT_SOURCE_DIR}/3rdpart/NWTool/src)
 set(ParseMp4_Root ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
-INCLUDE_DIRECTORIES(${ParseMp4_Root})
+include_directories(${NWTool_Root})
+include_directories(${ParseMp4_Root})
 
+set(LINK_LIB_LIST NWTool)
+
+file(GLOB NWTool_src_list ${NWTool_Root}/*/*.cpp ${NWTool_Root}/*/*.h ${NWTool_Root}/*/*.c)
 file(GLOB ParseMp4_src_list ${ParseMp4_Root}/*/*.cpp ${ParseMp4_Root}/*/*.h ${ParseMp4_Root}/*/*.c)
 
 if(WIN32)
@@ -44,5 +48,13 @@ set_target_properties(${PROJECT_NAME}_static PROPERTIES LIBRARY_OUTPUT_DIRECTORY
 #Install static library to system directory
 install(TARGETS ${PROJECT_NAME}_static ARCHIVE DESTINATION ${INSTALL_PATH_LIB})
 
+add_library(NWTool STATIC ${NWTool_src_list})
+#引用头文件路径
+#Reference header file path
+target_include_directories(NWTool PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
+set_target_properties(NWTool PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin")
+#安装静态库至系统目录
+#Install static library to system directory
+install(TARGETS NWTool ARCHIVE DESTINATION ${INSTALL_PATH_LIB})
 
 add_subdirectory(tests)
