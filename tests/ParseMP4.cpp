@@ -3,8 +3,8 @@
 
 
 
-int main() {
-	std::string filedata = File::loadFile("hy.mp4");
+int main(int argc, char* argv[]) {
+	std::string filedata = File::loadFile("test.mp4");
 	FileBox::Ptr root= std::make_shared<FileBox>();
 	MP4Buffer::Ptr stream = std::make_shared<MP4Buffer>();
 	stream->Append(filedata);
