@@ -12,6 +12,8 @@ public:
 	virtual ~ContainerBox() = default;
 	virtual std::string dumpStr() override { return nullptr; };
 
+	void addChildrenBox(const BaseBox::Ptr& box);
+
 	void Parse(MP4Buffer::Ptr stream);
 protected:
 	std::multimap<std::string, BaseBox::Ptr> _children;

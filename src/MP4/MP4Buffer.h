@@ -10,8 +10,10 @@ public:
 	MP4Buffer();
     ~MP4Buffer() = default;
 
-	uint32_t ReadUint32();
-	uint64_t ReadUint64();
+	std::shared_ptr<MP4Buffer> RetrieveAsMP4Buffer(size_t len);
+
+	uint32_t ReadUint32BigEndian();
+	uint64_t ReadUint64BigEndian();
 };
 
 
