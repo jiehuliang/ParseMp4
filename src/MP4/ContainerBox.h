@@ -10,7 +10,7 @@ public:
 	using Ptr = std::shared_ptr<ContainerBox>;
     ContainerBox(std::string type);
 	virtual ~ContainerBox() = default;
-	virtual std::string dumpStr() override { return nullptr; };
+	virtual std::string dumpStr() override;
 
 	void addChildrenBox(const BaseBox::Ptr& box);
 

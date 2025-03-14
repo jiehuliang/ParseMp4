@@ -1,17 +1,55 @@
 #ifndef MP4_H
 #define MP4_H
 
-#include "MP4Buffer.h"
-#include "FileBox.h"
-#include <memory>
-
-class MP4 {
-public:
-
-protected:
-	std::shared_ptr<MP4Buffer> _stream;
-	std::shared_ptr<FileBox> root;
-private:
-};
+#include "BoxBXML.h"
+#include "BoxCO64.h"
+#include "BoxCPRT.h"
+#include "BoxCTTS.h"
+#include "BoxDREF.h"
+#include "BoxELST.h"
+#include "BoxFREE.h"
+#include "BoxFRMA.h"
+#include "BoxFTYP.h"
+#include "BoxHDLR.h"
+#include "BoxHMHD.h"
+#include "BoxIINF.h"
+#include "BoxILOC.h"
+#include "BoxIMIF.h"
+#include "BoxIPMC.h"
+#include "BoxMDAT.h"
+#include "BoxMDHD.h"
+#include "BoxMEHD.h"
+#include "BoxMFHD.h"
+#include "BoxMFRO.h"
+#include "BoxMVHD.h"
+#include "BoxPADB.h"
+#include "BoxPDIN.h"
+#include "BoxPITM.h"
+#include "BoxSBGP.h"
+#include "BoxSCHI.h"
+#include "BoxSCHM.h"
+#include "BoxSDTP.h"
+#include "BoxSGPD.h"
+#include "BoxSMHD.h"
+#include "BoxSTCO.h"
+#include "BoxSTDP.h"
+#include "BoxSTSC.h"
+#include "BoxSTSD.h"
+#include "BoxSTSH.h"
+#include "BoxSTSS.h"
+#include "BoxSTSZ.h"
+#include "BoxSTTS.h"
+#include "BoxSTZ2.h"
+#include "BoxSUBS.h"
+#include "BoxTFHD.h"
+#include "BoxTFRA.h"
+#include "BoxTKHD.h"
+#include "BoxTREF.h"
+#include "BoxTREX.h"
+#include "BoxTRUN.h"
+#include "BoxUDTA.h"
+#include "BoxVMHD.h"
+#include "BoxXML.h"
+#include "UnknownBox.h"
 
 #endif //MP4_H

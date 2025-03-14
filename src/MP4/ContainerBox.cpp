@@ -2,6 +2,8 @@
 #include <algorithm>
 
 #include "BoxFactory.h"
+#include "DataBox.h"
+
 
 
 ContainerBox::ContainerBox(std::string type) {
@@ -26,15 +28,15 @@ void ContainerBox::Parse(MP4Buffer::Ptr stream) {
 		type = stream->RetrieveAsString(4);
 
 		BoxFactory& factory = BoxFactory::getInstance();
-		auto Box = factory.createBox(type);
-
+		BaseBox::Ptr Box = factory.createBox(type);
+		auto subStream = stream->RetrieveAsMP4Buffer(dataLength);
 		/* Container Box */
         if (factory.isContainerBox(type)) {
-			auto containerStream = stream->RetrieveAsMP4Buffer(dataLength);
-			std::dynamic_pointer_cast<ContainerBox>(Box)->Parse(containerStream);
+			
+			std::dynamic_pointer_cast<ContainerBox>(Box)->Parse(subStream);
 		}
 		else {
-			
+			std::dynamic_pointer_cast<DataBox>(Box)->processData(subStream, dataLength);
 		}
 		addChildrenBox(Box);
 	}
@@ -42,5 +44,15 @@ void ContainerBox::Parse(MP4Buffer::Ptr stream) {
 
 void ContainerBox::addChildrenBox(const BaseBox::Ptr& box) {
 	_children.insert(std::pair<std::string, BaseBox::Ptr>(box->getType(),box));
+}
+
+std::string ContainerBox::dumpStr() {
+	std::string s;
+	s += "MP4 Container Atom: " + this->_type + "\n";
+	for (auto& box : _children) {
+		s += block;
+		s.append(box.second->dumpStr());
+	}
+	return s;
 }
 
