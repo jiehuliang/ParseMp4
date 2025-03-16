@@ -50,7 +50,6 @@ std::string ContainerBox::dumpStr() {
 	std::string s;
 	s += "MP4 Container Atom: " + this->_type + "\n";
 	for (auto& box : _children) {
-		s += block;
 		s.append(box.second->dumpStr());
 	}
 	return s;
